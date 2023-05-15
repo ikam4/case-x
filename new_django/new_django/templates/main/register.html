@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CASE-X - регистрация
+{% endblock %}
+
+{% block main %}
+    <main class="main">
+        <div class="register">
+            <h1 class="title_page">Регистрация</h1>
+            <form action="" method="POST" id="form">
+                {% csrf_token %}
+                {{form.name}}
+                {{form.email}}
+                {{form.password}}
+                <input class="form_el" type="password" name='r_password' required='required' id='rep_pass' placeholder="Repeat password">
+                <p id="pass_check"></p>
+                <div class="reg_redirect">
+                    <p>Уже есть аккунт? <a href="{% url 'main:login' %}" id="reg_red_word">Войдите!</a></p>
+                </div>
+                <input class="form_btn" type="submit" id="reg_form_btn"disabled>
+            </form>
+        </div>
+    </main>
+{% endblock %}

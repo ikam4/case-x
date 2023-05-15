@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CASE-X - главная
+{% endblock %}
+
+{% block main %}
+    <main class="main" id="case_main">
+        <h1 class="title_page">Страница с кейсами</h1>
+        <div class="cases">
+            <h1 class="cases_title">Выбор кейса</h1>
+            <div class="cases_set">
+                {% for i in cases %}
+                <div class="case_card" id="case{{i.id}}">
+                    <img src="{% static i.image %}" alt="" class="case_el_img" >
+                    <div class="case_card_el">
+                        <p class="case_name">{{i.name}}</p>
+                        <p class="case_value">Цена: {{i.price}}$</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="roll"> <!-- display flex; column-->
+            <div id="roulette"> <!-- Барабан 100% ширины; background-->
+                <div class="vertical-line"></div>
+            </div>
+            <div class="btn" id="roll_btn"> <!-- Кнопка -->
+                <h1>Крутить</h1>
+                <p id="amount_roll"></p>
+            </div>
+            <div id="case_skins"></div>
+        </div>
+        <div class="boards">
+            <div class="history"> <!-- История -->
+                <h3 class="board_table_title">История выигрышей</h3>
+                <table>
+                    <thead class="board_thead">
+                        <tr>
+                            <td>Время</td>
+                            <td>Имя</td>
+                            <td>Выигрыш</td>
+                        </tr>
+                    </thead>
+                    <tbody class="board_tbody">
+                        {% for i in win_hist %}
+                        <tr>
+                            <td>{{i.time}}</td>
+                            <td>{{i.user_id}}</td>
+                            <td>{{i.skin}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="leaderboard"> <!-- Топ-10 -->
+                <h3 class="board_table_title">ТОП-10</h3>
+                <table>
+                    <thead class="board_thead">
+                        <tr>
+                            <td>Коэф</td>
+                            <td>Время</td>
+                            <td>Имя</td>
+                            <td>Выигрыш</td>
+                        </tr>
+                    </thead>
+                    <tbody class="board_tbody">
+                        {% for i in top %}
+                        <tr>
+                            <td>{{i.coef}}</td>
+                            <td>{{i.time}}</td>
+                            <td>{{i.user_id}}</td>
+                            <td>{{i.skin}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal">
+            <img src="" alt="" id="mod_skin_img">
+            <p id="mod_skin_name"></p>
+            <p id="mod_skin_quality"></p>
+            <p id="mod_skin_price"></p>
+            <button id="sell">Продать</button>
+            <button id="leave">Оставить</button>
+        </div>
+    </main>
+{% endblock %}

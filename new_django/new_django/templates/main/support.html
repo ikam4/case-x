@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CASE-X - регистрация
+{% endblock %}
+
+{% block main %}
+    <main class="main">
+        <div class="register">
+            <h1 class="title_page">Тех. поддержка</h1>
+            <form action="" method="POST" id="form">
+                {% csrf_token %}
+                {{form.name}}
+                {{form.email}}
+                <!--<input class="form_el" type="text" name='Name' required='required' placeholder="Name"><br>
+                <input class="form_el" type="email" name='email' required='required' placeholder="Email"><br>-->
+                <p class="desc_problem">Опишите свою проблему</p>
+                {{form.problem}}
+                <!--<textarea class="form_problem" name="problem" id="problem" cols="30" rows="10"></textarea>-->
+                <input class="form_btn" type="submit">
+            </form>
+        </div>
+    </main>
+{% endblock %}

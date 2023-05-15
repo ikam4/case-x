@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    CASE-X - авторизация
+{% endblock %}
+
+{% block main %}
+    <main class="main">
+        <div class="register">
+            <h1 class="title_page">Авторизация</h1>
+            <form action="" method="POST" id="form">
+                {% csrf_token %}
+                {{form.name}}
+                {{form.password}}
+                <p class="error">{{error}}</p>
+                <div class="reg_redirect">
+                    <p>Нет аккаунта? <a href="{% url 'main:register' %}" id="reg_red_word">Зарегистрируйтесь!</a></p>
+                </div>
+                <input class="form_btn" type="submit" id="sumbit">
+            </form>
+        </div>
+    </main>
+{% endblock %}                                                              

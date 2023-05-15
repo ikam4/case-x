@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CASE-X - личный кабинет
+{% endblock %}
+
+{% block main %}
+    <main class="main">
+        <h1 class="title_page">Личный кабинет</h1>
+        <div class="acc_info">
+            <div class="user_card"> <!--Карточка пользователя-->
+                <img src="{% static 'img/ava.png' %}" alt="" class="user_card_img">
+                <div class="user_card_desc">
+                    <p class="card_desc_el"><b>Имя: <span class="desc_el_id">{{username}}</span></b></p>
+                    <p class="card_desc_el"><b>Реф. код: <span class="desc_el_id">{{user.ref_code}}</span></b></p>
+                    <p class="card_desc_el"><b>Счет: <span class="desc_el_id">{{user.money}}$</span></b></p>
+                </div>
+                <a href="{% url 'main:exit' %}"><div class="exit_btn">
+                    <p class="exit_btn_text">ВЫЙТИ</p>
+                </div></a>
+            </div>
+            <div class="inventory"> <!--Инвентарь-->
+                <h1 class="inv_title">Мой инвентарь</h1>
+                <hr class="inv_line">
+                <div class="inv_set""><!--Сетка инвентаря-->
+                    {% for i in inv_items %}
+                    <div class="inv_card"> <!--Элемент инвентаря-->
+                        <p class="dots">...</p>
+                        <img src="{% static i.image %}" alt="" class="inv_el_img" >
+                        <div class="inv_card_el">
+                            <p class="inv_name"></p>
+                            <p class="inv_name">{{i.name}}</p>
+                            <p class="inv_value">Цена: {{i.price}}$</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="boards">
+            <div class="history"> <!-- История -->
+                <h3 class="board_table_title">История выигрышей</h3>
+                <table>
+                    <thead class="board_thead">
+                        <tr>
+                            <td>Время</td>
+                            <td>Имя</td>
+                            <td>Выигрыш</td>
+                        </tr>
+                    </thead>
+                    <tbody class="board_tbody">
+                        {% for i in win_hist %}
+                        <tr>
+                            <td>{{i.time}}</td>
+                            <td>{{i.user_id}}</td>
+                            <td>{{i.skin}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="leaderboard"> <!-- Топ-10 -->
+                <h3 class="board_table_title">ТОП-10</h3>
+                <table>
+                    <thead class="board_thead">
+                        <tr>
+                            <td>Коэф</td>
+                            <td>Время</td>
+                            <td>Имя</td>
+                            <td>Выигрыш</td>
+                        </tr>
+                    </thead>
+                    <tbody class="board_tbody">
+                        {% for i in top %}
+                        <tr>
+                            <td>{{i.coef}}</td>
+                            <td>{{i.time}}</td>
+                            <td>{{i.user_id}}</td>
+                            <td>{{i.skin}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+{% endblock %}
